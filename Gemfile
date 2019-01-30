@@ -14,6 +14,9 @@ gem 'kaminari'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'erb2haml'
+gem 'bootstrap', '~> 4.1.1'
+gem 'jquery-rails'
+gem 'font-awesome-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

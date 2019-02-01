@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+
   def update
     if @user.update_attributes(user_params)
       redirect_to @user
@@ -18,5 +18,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name)
+  end
+
+  def set_user
+    @user = User.find(current_user.id)
   end
 end

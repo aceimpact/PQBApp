@@ -1,0 +1,6 @@
+= form_for @question do |f|
+  = f.label :subject
+  = f.select :subject, Question.subjects.keys.map {|k| [I18n.t("enums.question.subject.#{k}"), k]} 
+  = f.label :content
+  = f.text_area :content
+  = f.submit

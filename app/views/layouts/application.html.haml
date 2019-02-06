@@ -2,17 +2,26 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+<<<<<<< HEAD
     %meta{:charset => "utf-8"}/
     %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
     %meta{:content => "ie=edge", "http-equiv" => "x-ua-compatible"}/
+=======
+>>>>>>> Question
     %title PQBApp
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+<<<<<<< HEAD
     = render 'layouts/header'
     = render 'layouts/mainvisual'
     %p.notice= notice
     %p.alert= alert
     = yield
     = render 'layouts/footer'
+=======
+    %p.notice= notice
+    %p.alert= alert
+    = yield
+>>>>>>> Question

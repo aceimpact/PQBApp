@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+  enums:
+    question:
+      subject:
+        japanese: 国語
+        math: 数学
+        society: 社会
+        science: 理科
+        english: 英語

@@ -1,6 +1,9 @@
 = form_for @question do |f|
   = f.label :subject
-  = f.select :subject, Question.subjects.keys.map {|k| [I18n.t("enums.question.subject.#{k}"), k]} 
+  = f.select :subject, Question.subjects.keys.map {|k| [I18n.t("enums.question.subject.#{k}"), k]}
   = f.label :content
   = f.text_area :content
-  = f.submit
+  = f.fields_for @question.question_images do |ff|
+    = ff.label :image
+    = ff.file_field :image_id
+  = f.submit "投稿する"

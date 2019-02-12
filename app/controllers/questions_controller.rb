@@ -9,7 +9,8 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = current_user.questions.build
+    @question = Question.new
+    @question.question_images.build
   end
 
   def edit
@@ -39,7 +40,7 @@ class QuestionsController < ApplicationController
 
   private
   def question_params
-    params.require(:question).permit(:content, :subject)
+    params.require(:question).permit(:content, :subject, question_images_attributes: [:id, :image_id])
   end
 
   def set_question

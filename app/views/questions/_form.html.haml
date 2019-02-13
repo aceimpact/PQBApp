@@ -3,7 +3,8 @@
   = f.select :subject, Question.subjects.keys.map {|k| [I18n.t("enums.question.subject.#{k}"), k]}
   = f.label :content
   = f.text_area :content
-  = f.fields_for @question.question_images do |ff|
-    = ff.label :image
-    = ff.file_field :image_id
+  = f.fields_for :images do |image|
+    = render 'image_fields', f: image
+  .links
+    = link_to_add_association '画像追加', f, :images
   = f.submit "投稿する"

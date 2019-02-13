@@ -2,6 +2,7 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:edit, :update, :destroy]
 
   def index
+    @questions = Question.all
   end
 
   def show
@@ -11,7 +12,7 @@ class QuestionsController < ApplicationController
 
   def new
     @question = current_user.questions.new
-    @question.question_images.build
+    @question.images.build
   end
 
   def edit
@@ -41,7 +42,7 @@ class QuestionsController < ApplicationController
 
   private
   def question_params
-    params.require(:question).permit(:content, :subject, question_images_attributes: [:id, :image_id])
+    params.require(:question).permit(:content, :subject, images_attributes: [:id, :file, :_destroy])
   end
 
   def set_question

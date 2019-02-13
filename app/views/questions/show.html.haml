@@ -1,5 +1,6 @@
-= @question.content
-= @question.subject_i18n
+- @questions.each do |q|
+  = q.content
+  = q.subject_i18n
 = link_to "編集する", edit_question_path(@question)
 = link_to "削除する", question_path(@question), method: :delete
 %p= link_to "ホームへ", root_path

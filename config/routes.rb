@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :update, :destroy]
 
-  resources :questions
+  resources :questions do
+    resources :answers, only: [:create, :destroy]
+  end
 
   root 'questions#index'
 

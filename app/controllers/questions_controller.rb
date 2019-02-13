@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
+    @question = current_user.questions.new
     @question.question_images.build
   end
 

@@ -1,8 +1,7 @@
-- @questions.each do |q|
-  = q.content
-  = q.subject_i18n
-  - q.images.each do |image|
-    = image_tag image.file.url, size: '50'
-  = link_to "編集する", edit_question_path(q)
-  = link_to "削除する", question_path(q), method: :delete
-%p= link_to "ホームへ", root_path
+= @question.content
+= @question.subject_i18n
+= link_to "編集する", edit_question_path(@question)
+= link_to "削除する", question_path(@question), method: :delete, data: { confirm: '本当に削除してよろしいですか？' }
+= form_for [@question, @answer] do |f|
+  = f.text_area :content
+  = f.submit

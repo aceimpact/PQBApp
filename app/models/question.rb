@@ -3,6 +3,7 @@ class Question < ApplicationRecord
   has_many :question_images, dependent: :destroy
   has_many :images, through: :question_images
   accepts_nested_attributes_for :images, allow_destroy: true
+  has_many :answers, dependent: :destroy
 
   validates :subject, presence: true
   validates :content, presence: true

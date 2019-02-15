@@ -18,6 +18,7 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 gem 'font-awesome-rails'
 gem 'enum_help'
+gem 'cocoon'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -35,4 +36,6 @@ group :development do
   gem 'letter_opener_web'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'rb-readline'
+  gem 'pry-byebug'
 end

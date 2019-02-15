@@ -1,6 +1,7 @@
 class AnswersController < ApplicationController
   before_action :set_question
   before_action :set_answer, only: [:edit, :update, :destroy]
+  before_action :admin_user
 
   def edit
   end
@@ -15,11 +16,10 @@ class AnswersController < ApplicationController
   end
 
   def update
-    @answer = @question.answers.find(params[:id])
-    if @answer.update
+    if @answer.update(answer_params)
       redirect_to root_url
     else
-      render "questions/show"
+      render :edit
     end
   end
 
@@ -39,5 +39,9 @@ class AnswersController < ApplicationController
 
   def set_answer
     @answer = @question.answers.find(params[:id])
+  end
+
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
   end
 end

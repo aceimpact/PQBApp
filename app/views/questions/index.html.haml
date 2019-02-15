@@ -1,3 +1,20 @@
 %h1 home
+= link_to "投稿する", new_question_path
 - if user_signed_in?
   %p= link_to "ログアウト", destroy_user_session_path, method: :delete
+- @questions.each do |q|
+  %div
+    = q.content
+    = q.subject_i18n
+    = link_to "編集する", edit_question_path(q)
+    = link_to "削除する", question_path(q), method: :delete
+    - if current_user.admin?
+      = form_for [@question, @answer] do |f|
+        = f.text_area :content
+        = f.submit
+    - q.answers.each do |a|
+      = a.content
+      - if current_user.id == a.user_id
+        = link_to "編集する", edit_question_answer_path(q, a)
+        = link_to "削除する", question_answer_path(q, a), method: :delete, data: { confirm: '本当に削除してよろしいですか？' }
+%p= link_to "ホームへ", root_path

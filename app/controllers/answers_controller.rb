@@ -3,6 +3,11 @@ class AnswersController < ApplicationController
   before_action :set_answer, only: [:edit, :update, :destroy]
   before_action :admin_user
 
+  def new
+    @answer = @question.answers.new
+    @answer.answer_images.build
+  end
+
   def edit
   end
 
@@ -11,7 +16,7 @@ class AnswersController < ApplicationController
     if @answer.save
       redirect_to root_url
     else
-      render "questions/show"
+      render :new
     end
   end
 
@@ -30,7 +35,7 @@ class AnswersController < ApplicationController
 
   private
   def answer_params
-    params.require(:answer).permit(:content)
+    params.require(:answer).permit(:content, answer_images_attributes: [:id, :file, :_destroy])
   end
 
   def set_question

@@ -2,20 +2,21 @@
 = link_to "投稿する", new_question_path
 - if user_signed_in?
   %p= link_to "ログアウト", destroy_user_session_path, method: :delete
+%h2 投稿一覧
 - @questions.each do |q|
   %div
-    = q.content
-    = q.subject_i18
+    = link_to q.content, question_path(q)
+    = q.subject_i18n
     - q.images.each do |image|
       = image_tag image.file.url, size: '50'
+    - if current_user.admin?
+      = link_to "コメントする", new_question_answer_path(q)
     = link_to "編集する", edit_question_path(q)
     = link_to "削除する", question_path(q), method: :delete
-    - if current_user.admin?
-      = form_for [@question, @answer] do |f|
-        = f.text_area :content
-        = f.submit
     - q.answers.each do |a|
       = a.content
+      - a.answer_images.each do |answer_image|
+        = image_tag answer_image.file.url, size: '50'
       - if current_user.id == a.user_id
         = link_to "編集する", edit_question_answer_path(q, a)
         = link_to "削除する", question_answer_path(q, a), method: :delete, data: { confirm: '本当に削除してよろしいですか？' }

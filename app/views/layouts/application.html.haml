@@ -8,11 +8,14 @@
     %title PQBApp
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application'
   %body
     = render 'layouts/header'
-    = render 'layouts/mainvisual'
-    %p.notice= notice
-    %p.alert= alert
+    -if not user_signed_in?
+      = render 'layouts/mainvisual'
+    -if notice
+      %p.notice= notice
+    -if alert
+      %p.alert= alert
     = yield
     = render 'layouts/footer'

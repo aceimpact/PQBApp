@@ -3,10 +3,13 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
+    @answers = Answer.all
   end
 
   def show
     @question = Question.find(params[:id])
+    @answer = @question.answers.new
+    @answer.answer_images.build
   end
 
   def new

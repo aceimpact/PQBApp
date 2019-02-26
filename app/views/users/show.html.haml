@@ -1,2 +1,15 @@
 - provide(:title, "マイページ")
-%h3 自分のした質問一覧
+.container
+  .question
+    %h3 自分のした質問一覧
+    - @question.each do |q|
+      %ul.list-group
+        -if q.images.present?
+          %li.list-group-item
+            - q.images.each do |image|
+              %img= image_tag image.file.url, class: "card-img-top"
+        %li.list-group-item= q.content
+        - if current_user.id == q.user_id
+          %li.list-group-item
+            = link_to "編集する", edit_question_path(q), class: "btn btn-primary btn-sm"
+            = link_to "削除する", question_path(q), method: :delete, class: "btn btn-danger btn-sm",  data: { confirm: '本当に削除してよろしいですか？' }

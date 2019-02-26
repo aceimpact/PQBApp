@@ -1,28 +1,23 @@
 - provide(:title, 'ユーザー登録')
-%main
-  .container
-    %section
-      .container
-        .row
-          .col-sm-5
-            %h4.font-alt ユーザー登録
-            = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-              = devise_error_messages!
-              .form-group
-                = f.label :name
-                = f.text_field :name, autofocus: true, autocomplete: "name"
-              .form-group
-                = f.label :email
-                = f.email_field :email, autofocus: true, autocomplete: "email"
-              .form-group
-                = f.label :password
-                - if @minimum_password_length
-                  %em
-                    (#{@minimum_password_length} 文字以上)
-              = f.password_field :password, autocomplete: "new-password"
-              .form-group
-                = f.label :password_confirmation
-                = f.password_field :password_confirmation, autocomplete: "new-password"
-              .actions
-                = f.submit "ユーザー登録する", class: "btn btn-outline-danger btn-sm"
-            = render "devise/shared/links"
+.container
+  %h4.font-alt ユーザー登録
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = devise_error_messages!
+    .form-group
+      = f.label :name
+      = f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control"
+    .form-group
+      = f.label :email
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
+    .form-group
+      = f.label :password
+      - if @minimum_password_length
+        %em
+          (#{@minimum_password_length} 文字以上)
+        = f.password_field :password, autocomplete: "new-password",class: "form-control"
+    .form-group
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
+    .actions
+      = f.submit "ユーザー登録する", class: "btn btn-outline-success btn-sm"
+    = render "devise/shared/links"

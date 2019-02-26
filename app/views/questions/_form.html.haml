@@ -1,10 +1,15 @@
-= form_for @question do |f|
-  = f.label :subject
-  = f.select :subject, Question.subjects.keys.map {|k| [I18n.t("enums.question.subject.#{k}"), k]}
-  = f.label :content
-  = f.text_area :content
-  = f.fields_for :images do |image|
-    = render 'image_fields', f: image
-  .links
-    = link_to_add_association '画像追加', f, :images
-  = f.submit "投稿する"
+.container
+  %h3 投稿ページ
+  = form_for @question do |f|
+    .form-group
+      = f.label :subject
+      = f.select :subject, Question.subjects.keys.map {|k| [I18n.t("enums.question.subject.#{k}"), k]}, {}, class: "form-control"
+    .form-group
+      = f.label :content
+      = f.text_area :content, class: "form-control"
+    .form-group
+      = f.fields_for :images do |image|
+        = render 'image_fields', f: image
+      .links
+        = link_to_add_association '画像追加', f, :images, class: "btn btn-primary"
+        = f.submit "投稿する", class: "btn btn-primary"

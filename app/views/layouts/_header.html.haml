@@ -1,7 +1,7 @@
-%nav.navbar.fixed-top.navbar-expand-lg.navbar-light.white.scrolling-navbar
+%nav.navbar.navbar-expand-lg.navbar-light.white.scrolling-navbar
   .container
     / Brand
-    %a.navbar-brand.waves-effect{:href => ""}
+    %a.navbar-brand.waves-effect{:href => "/"}
       %strong.blue-text PQBApp
     / Collapse
     %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
@@ -30,6 +30,8 @@
             %a.nav-link.waves-effect.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} お気に入り
             %ul.dropdown-menu
               %li.dropdown= link_to "お気に入りした質問"
+          = link_to "投稿する", new_question_path, class: "btn btn-primary"
+          = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-primary"
         - else
           / header-Wellcome
           %li.nav-item.dropdown

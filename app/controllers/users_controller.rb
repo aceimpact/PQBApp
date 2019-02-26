@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 
+  def show
+    @user = User.find(params[:id])
+    @question = @user.questions
+  end
+
   def update
     if @user.update_attributes(user_params)
       redirect_to @user

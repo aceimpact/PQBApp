@@ -1,3 +1,33 @@
-%h1 投稿詳細ページ
-%h3= @question.content
-= link_to "ホームへ戻る", root_path
+- provide(:title, '投稿詳細')
+.container
+  .question
+    %ul.list-group
+      - if current_user.teacher?
+        %li.list-group-item= @question.user.name
+      %li.list-group-item.active= @question.subject_i18n
+      -if @question.images.present?
+        %li.list-group-item
+          - @question.images.each do |image|
+            %img= image_tag image.file.url, class: "card-img-top"
+      %li.list-group-item= @question.content
+      %li.list-group-item
+        - if current_user.id == @question.user_id
+          = link_to "編集する", edit_question_path(@question), class: "btn btn-primary btn-sm"
+          = link_to "削除する", question_path(@question), method: :delete, class: "btn btn-danger btn-sm",  data: { confirm: '本当に削除してよろしいですか？' }
+  - @question.answers.each do |answer|
+    - if answer.content.present?
+      %h3 解答
+      .answer
+        %ul.list-group
+          %li.list-group-item= link_to answer.content, question_answer_path(@question, answer)
+  - if current_user.teacher?
+    .answer.p-3.mb-2.bg-dark.text-whit
+      = form_for [@question, @answer] do |f|
+        .form-group
+          = f.text_area :content, class: "form-control"
+        .form-group
+          = f.fields_for :answer_images do |answer_image|
+            = render 'answer_image_fields', f: answer_image
+        .links
+          = link_to_add_association '画像追加', f, :answer_images, class: "btn btn-primary"
+        = f.submit "投稿する", class: "btn btn-outline-primary"

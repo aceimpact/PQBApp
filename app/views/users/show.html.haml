@@ -4,6 +4,7 @@
     %h3 自分のした質問一覧
     - @question.each do |q|
       %ul.list-group
+        %li.list-group-item.active= q.subject_i18n
         -if q.images.present?
           %li.list-group-item
             - q.images.each do |image|

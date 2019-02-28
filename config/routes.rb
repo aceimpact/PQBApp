@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, only: [:show, :update, :destroy]
   resources :questions do
-    resources :answers, only: [:show, :edit, :create, :update, :destroy]
+    resources :answers, only: [:edit, :create, :update, :destroy]
   end
   root 'questions#index'
 

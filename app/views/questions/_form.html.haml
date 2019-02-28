@@ -3,10 +3,10 @@
   = form_for @question do |f|
     .form-group
       = f.label :subject
-      = f.select :subject, Question.subjects.keys.map {|k| [I18n.t("enums.question.subject.#{k}"), k]}, {}, class: "form-control"
+      = f.select :subject, Question.subjects_names, {}, class: "form-control"
     .form-group
       = f.label :content
-      = f.text_area :content, class: "form-control"
+      = f.text_area :content, class: "form-control js-text-auto-size"
     .form-group
       = f.fields_for :images do |image|
         = render 'image_fields', f: image

@@ -1,9 +1,9 @@
 - provide(:title, "マイページ")
 .container
-  .question
+  .question-detail
     %h3 自分のした質問一覧
-    - @question.each do |q|
-      %ul.list-group
+    %ul.list-group
+      - @question.each do |q|
         %li.list-group-item.active= q.subject_i18n
         -if q.images.present?
           %li.list-group-item

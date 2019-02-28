@@ -19,9 +19,5 @@
 //= require bootstrap
 //= require bootstrap.min
 //= require mdb
-//= require mdb.min
+//= require textAutosize
 //= require_tree .
-
-$(document).ready(function(){
-  $('textarea').autosize();
-});

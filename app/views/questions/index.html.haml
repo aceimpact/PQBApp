@@ -13,4 +13,5 @@
           %td= q.subject_i18n
           %td= link_to q.content, question_path(q)
           - q.answers.each do |a|
-            %td= link_to a.content, question_answer_path(q, a)
+            %td= a.content
+  = paginate @questions

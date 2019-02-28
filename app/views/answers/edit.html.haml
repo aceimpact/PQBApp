@@ -1,6 +1,6 @@
-.text-center
+.container
   = form_for [@question, @answer] do |f|
-    %br/
-    = f.text_area :content, label: "コメント", value: "#{@answer.content}", size: "80x5"
-    %br/
-    = f.submit "更新する", class: "btn btn-info"
+    .form-group
+      = f.label :content
+      = f.text_area :content, label: "コメント", value: "#{@answer.content}", class: "form-control"
+    = f.submit "更新する", class: "btn btn-primary"

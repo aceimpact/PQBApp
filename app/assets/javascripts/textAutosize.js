@@ -1,3 +1,3 @@
-$('js-text-auto-size').ready(function(){
-  $('textarea').autosize();
+$('document').ready(function(){
+  $('.js-text-auto-size').autosize();
 });

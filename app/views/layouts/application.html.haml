@@ -11,8 +11,6 @@
     = javascript_include_tag 'application'
   %body
     = render 'layouts/header'
-    -if not user_signed_in?
-      = render 'layouts/mainvisual'
     -if notice
       %p.notice= notice
     -if alert

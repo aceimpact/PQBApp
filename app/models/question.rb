@@ -9,4 +9,8 @@ class Question < ApplicationRecord
   validates :content, presence: true
 
   enum subject: { japanese: 0, math: 1, society: 2, science: 3, english: 4 }
+
+  def self.subjects_names
+    subjects.keys.map {|subject_key| [I18n.t("enums.question.subject.#{subject_key}"), subject_key]}
+  end
 end

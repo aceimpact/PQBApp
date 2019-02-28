@@ -1,12 +1,7 @@
 class AnswersController < ApplicationController
-  before_action :set_question, only: [:edit, :create, :update, :destroy]
+  before_action :set_question
   before_action :set_answer, only: [:edit, :update, :destroy]
-  before_action :teacher_user, only: [:edit, :create, :update, :destroy]
-
-  def show
-    @answer = Answer.find(params[:id])
-    @question = @answer.question
-  end
+  before_action :teacher_user
 
   def edit
   end

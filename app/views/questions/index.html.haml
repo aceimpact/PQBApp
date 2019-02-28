@@ -1,23 +1,17 @@
-%h1 home
-= link_to "投稿する", new_question_path
-- if user_signed_in?
-  %p= link_to "ログアウト", destroy_user_session_path, method: :delete
-%h2 投稿一覧
-- @questions.each do |q|
-  %div
-    = link_to q.content, question_path(q)
-    = q.subject_i18n
-    - q.images.each do |image|
-      = image_tag image.file.url, size: '50'
-    - if current_user.admin?
-      = link_to "コメントする", new_question_answer_path(q)
-    = link_to "編集する", edit_question_path(q)
-    = link_to "削除する", question_path(q), method: :delete
-    - q.answers.each do |a|
-      = a.content
-      - a.answer_images.each do |answer_image|
-        = image_tag answer_image.file.url, size: '50'
-      - if current_user.id == a.user_id
-        = link_to "編集する", edit_question_answer_path(q, a)
-        = link_to "削除する", question_answer_path(q, a), method: :delete, data: { confirm: '本当に削除してよろしいですか？' }
-%p= link_to "ホームへ", root_path
+- provide(:title, 'HOME')
+.container
+  %h2 質問
+  %table.table.table-bordered.table-hover.text-center
+    %thead
+      %tr
+        %th{:scope => "col"} 教科
+        %th{:scope => "col"} 質問
+        %th{:scope => "col"} コメント
+    %tbody
+      - @questions.each do |q|
+        %tr
+          %td= q.subject_i18n
+          %td= link_to q.content, question_path(q)
+          - q.answers.each do |a|
+            %td= a.content
+  = paginate @questions

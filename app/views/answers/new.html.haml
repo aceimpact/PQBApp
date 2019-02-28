@@ -1,8 +1,0 @@
-= form_for [@question, @answer] do |f|
-  = f.text_area :content
-  = f.fields_for :answer_images do |answer_image|
-    = render 'answer_image_fields', f: answer_image
-  .links
-    = link_to_add_association '画像追加', f, :answer_images
-  = f.submit "投稿する", class: "btn btn-info"
-= link_to "ホームへ戻る", root_path

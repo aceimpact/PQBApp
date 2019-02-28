@@ -19,6 +19,7 @@ gem 'jquery-rails'
 gem 'font-awesome-rails'
 gem 'enum_help'
 gem 'cocoon'
+gem 'autosize-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

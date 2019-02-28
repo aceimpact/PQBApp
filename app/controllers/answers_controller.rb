@@ -1,12 +1,7 @@
 class AnswersController < ApplicationController
   before_action :set_question
   before_action :set_answer, only: [:edit, :update, :destroy]
-  before_action :admin_user
-
-  def new
-    @answer = @question.answers.new
-    @answer.answer_images.build
-  end
+  before_action :teacher_user
 
   def edit
   end
@@ -46,7 +41,7 @@ class AnswersController < ApplicationController
     @answer = @question.answers.find(params[:id])
   end
 
-  def admin_user
-    redirect_to(root_path) unless current_user.admin?
+  def teacher_user
+    redirect_to(root_path) unless current_user.teacher?
   end
 end

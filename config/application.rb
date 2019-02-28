@@ -14,6 +14,11 @@ module PQBApp
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'javascripts')
+    Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'stylesheets')
+    Rails.application.config.assets.precompile += %w(*.eot *.woff *.woff2 *.ttf *.svg *.otf *.png *.jpg *.gif )
+
     config.i18n.default_locale = :ja
 
     config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]

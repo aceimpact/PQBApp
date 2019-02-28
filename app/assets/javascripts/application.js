@@ -15,11 +15,9 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require cocoon
+//= require jquery.autosize
 //= require bootstrap
 //= require bootstrap.min
 //= require mdb
-//= require mdb.min
-//= require jquery-3.3.1.min
-//= require popper.min
-//= require rails-ujs
+//= require textAutosize
 //= require_tree .

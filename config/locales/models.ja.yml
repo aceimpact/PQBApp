@@ -2,7 +2,9 @@ ja:
   activerecord:
     attributes:
       user:
+        name: 氏名
         email: メールアドレス
         password: パスワード
-        password_confirmation: 確認用パスワード
+        password_confirmation: パスワード確認
         remember_me: 次回から自動的にログイン
+        current_password: 現在のパスワード

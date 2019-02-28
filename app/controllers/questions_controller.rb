@@ -2,11 +2,14 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:edit, :update, :destroy]
 
   def index
-    @questions = Question.all
+    @questions = Question.page(params[:page]).per(15).order('updated_at: :desc')
+    @answers = Answer.all
   end
 
   def show
     @question = Question.find(params[:id])
+    @answer = @question.answers.build
+    @answer.answer_images.build
   end
 
   def new

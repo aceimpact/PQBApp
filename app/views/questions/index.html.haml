@@ -1,7 +1,7 @@
 - provide(:title, 'HOME')
 .container
   %h2 質問
-  %table.table.table-bordered.table-hover.text-center
+  %table.table.table-bordered.table-hover.text-center.questionTable
     %thead
       %tr
         %th{:scope => "col"} 教科
@@ -10,7 +10,16 @@
     %tbody
       - @questions.each do |q|
         %tr
-          %td= q.subject_i18n
+          -if q.subject == "japanese"
+            %td.badge.badge-warning.questionTable__subject= q.subject_i18n
+          -if q.subject == "math"
+            %td.badge.badge-primary.questionTable__subject= q.subject_i18n
+          -if q.subject == "society"
+            %td.badge.badge-info.questionTable__subject= q.subject_i18n
+          -if q.subject == "science"
+            %td.badge.badge-success.questionTable__subject= q.subject_i18n
+          -if q.subject == "english"
+            %td.badge.badge-danger.questionTable__subject= q.subject_i18n
           %td= link_to q.content, question_path(q)
           - q.answers.each do |a|
             %td= a.content

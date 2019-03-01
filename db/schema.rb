@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190216115714) do
+ActiveRecord::Schema.define(version: 20190301082125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20190216115714) do
     t.string "name"
     t.string "icon"
     t.boolean "teacher", default: false, null: false
-    t.integer "grade"
+    t.integer "grade", default: 0, null: false
     t.boolean "admin", default: false, null: false
     t.string "confirmation_token"
     t.datetime "confirmed_at"

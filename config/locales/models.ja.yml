@@ -3,6 +3,7 @@ ja:
     attributes:
       user:
         name: 氏名
+        grade: 学年
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード確認

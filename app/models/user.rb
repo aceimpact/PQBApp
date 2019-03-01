@@ -8,5 +8,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
+  enum grade: { firstgrade: 0, secondgrade: 1, thirdgrade: 2 }
+
   mount_uploader :icon, ImagesUploader
+
+  def self.grades_names
+    grades.keys.map {|grade_key| [I18n.t("enums.user.grade.#{grade_key}"), grade_key]}
+  end
 end

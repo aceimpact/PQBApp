@@ -10,8 +10,8 @@
           - @question.images.each do |image|
             %img= image_tag image.file.url, class: "card-img-top"
       %li.list-group-item= @question.content
-      %li.list-group-item
-        - if current_user.id == @question.user_id
+      - if current_user.id == @question.user_id
+        %li.list-group-item
           = link_to "編集する", edit_question_path(@question), class: "btn btn-primary btn-sm"
           = link_to "削除する", question_path(@question), method: :delete, class: "btn btn-danger btn-sm",  data: { confirm: '本当に削除してよろしいですか？' }
   - @question.answers.each do |answer|

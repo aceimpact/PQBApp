@@ -2,9 +2,18 @@
 .container
   .question-detail
     %h3 自分のした質問一覧
-    %ul.list-group
+    %ul.list-group.questionList
       - @question.each do |q|
-        %li.list-group-item.active= q.subject_i18n
+        -if q.subject == "japanese"
+          %li.list-group-item.badge.badge-warning.questionList__subject= q.subject_i18n
+        -if q.subject == "math"
+          %li.list-group-item.badge.badge-primary.questionList__subject= q.subject_i18n
+        -if q.subject == "society"
+          %li.list-group-item.badge.badge-info.questionList__subject= q.subject_i18n
+        -if q.subject == "science"
+          %li.list-group-item.badge.badge-success.questionList__subject= q.subject_i18n
+        -if q.subject == "english"
+          %li.list-group-item.badge.badge-danger.questionList__subject= q.subject_i18n
         -if q.images.present?
           %li.list-group-item
             - q.images.each do |image|

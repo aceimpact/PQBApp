@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190216115714) do
+ActiveRecord::Schema.define(version: 20190301122955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 20190216115714) do
     t.text "file", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "answer_likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "answer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_answer_likes_on_answer_id"
+    t.index ["user_id"], name: "index_answer_likes_on_user_id"
   end
 
   create_table "answers", force: :cascade do |t|
@@ -55,6 +64,15 @@ ActiveRecord::Schema.define(version: 20190216115714) do
     t.index ["question_id"], name: "index_question_images_on_question_id"
   end
 
+  create_table "question_likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "question_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_question_likes_on_question_id"
+    t.index ["user_id"], name: "index_question_likes_on_user_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.text "content", null: false
     t.integer "subject", default: 0, null: false
@@ -75,7 +93,7 @@ ActiveRecord::Schema.define(version: 20190216115714) do
     t.string "name"
     t.string "icon"
     t.boolean "teacher", default: false, null: false
-    t.integer "grade"
+    t.integer "grade", default: 0, null: false
     t.boolean "admin", default: false, null: false
     t.string "confirmation_token"
     t.datetime "confirmed_at"
@@ -88,9 +106,13 @@ ActiveRecord::Schema.define(version: 20190216115714) do
 
   add_foreign_key "answer_image_relationships", "answer_images"
   add_foreign_key "answer_image_relationships", "answers"
+  add_foreign_key "answer_likes", "answers"
+  add_foreign_key "answer_likes", "users"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "question_images", "images"
   add_foreign_key "question_images", "questions"
+  add_foreign_key "question_likes", "questions"
+  add_foreign_key "question_likes", "users"
   add_foreign_key "questions", "users"
 end

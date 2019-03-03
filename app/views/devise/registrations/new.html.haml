@@ -7,6 +7,9 @@
       = f.label :name
       = f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control"
     .form-group
+      = f.label :grade
+      = f.select :grade, User.grades_names, {}, class: "form-control"
+    .form-group
       = f.label :email
       = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
     .form-group

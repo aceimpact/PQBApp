@@ -11,9 +11,10 @@
     = javascript_include_tag 'application'
   %body
     = render 'layouts/header'
-    -if notice
-      %p.notice= notice
-    -if alert
-      %p.alert= alert
+    .flash
+      -if notice
+        %p.alert.alert-info.flash__notice= notice
+      -if alert
+        %p.alert.alert-danger.flash__alert= alert
     = yield
     = render 'layouts/footer'

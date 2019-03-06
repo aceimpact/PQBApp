@@ -2,10 +2,10 @@
 .container
   %table.table.table-bordered.table-hover.text-center.questionTable
     %thead
-      %tr
-        %th{:scope => "col"} 教科
-        %th{:scope => "col"} 質問
-        %th{:scope => "col"} コメント
+      %tr.table-active
+        %th.questionTable__first-table{:scope => "col"} 教科
+        %th.questionTable__second-table{:scope => "col"} 質問
+        %th.questionTable__third-table{:scope => "col"} コメント
     %tbody
       - @questions.each do |q|
         %tr
@@ -19,7 +19,9 @@
             %td.badge.badge-success.questionTable__subject= q.subject_i18n
           -if q.subject == "english"
             %td.badge.badge-danger.questionTable__subject= q.subject_i18n
-          %td= link_to q.content, question_path(q)
-          - q.answers.each do |a|
-            %td= a.content
+          %td.questionTable__content= link_to q.content, question_path(q)
+          - if q.answers.present?
+            %td= link_to "コメント(#{q.answers.count})", question_path(q)
+          -else
+            %td= "コメント(#{q.answers.count})"
   = paginate @questions

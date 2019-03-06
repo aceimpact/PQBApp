@@ -9,3 +9,6 @@ ja:
         password_confirmation: パスワード確認
         remember_me: 次回から自動的にログイン
         current_password: 現在のパスワード
+      question:
+        subject: 教科
+        content: 質問内容

@@ -10,6 +10,6 @@
     .form-group
       = f.fields_for :images do |image|
         = render 'image_fields', f: image
-      .links
-        = link_to_add_association '画像追加', f, :images, class: "btn btn-primary"
-        = f.submit "投稿する", class: "btn btn-primary"
+    .links
+      = link_to_add_association '画像追加', f, :images, class: "btn btn-primary"
+    = f.submit "投稿する", class: "btn btn-primary"

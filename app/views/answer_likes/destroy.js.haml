@@ -1,0 +1,1 @@
+$(".js-answer_like-button-#{@answer_like.answer_id}").html("#{j(render partial: 'answer_likes/answer_like', locals: { answer: @answer_like.answer, user_id: @answer_like.user_id, question: @question })}");

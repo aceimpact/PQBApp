@@ -2,9 +2,18 @@
 .container
   .question-detail
     %h3 自分のした質問一覧
-    %ul.list-group
+    %ul.list-group.questionList
       - @question.each do |q|
-        %li.list-group-item.active= q.subject_i18n
+        -if q.subject == "japanese"
+          %li.list-group-item.badge.badge-warning.questionList__subject= q.subject_i18n
+        -if q.subject == "math"
+          %li.list-group-item.badge.badge-primary.questionList__subject= q.subject_i18n
+        -if q.subject == "society"
+          %li.list-group-item.badge.badge-info.questionList__subject= q.subject_i18n
+        -if q.subject == "science"
+          %li.list-group-item.badge.badge-success.questionList__subject= q.subject_i18n
+        -if q.subject == "english"
+          %li.list-group-item.badge.badge-danger.questionList__subject= q.subject_i18n
         -if q.images.present?
           %li.list-group-item
             - q.images.each do |image|
@@ -14,3 +23,34 @@
           %li.list-group-item
             = link_to "編集する", edit_question_path(q), class: "btn btn-primary btn-sm"
             = link_to "削除する", question_path(q), method: :delete, class: "btn btn-danger btn-sm",  data: { confirm: '本当に削除してよろしいですか？' }
+  .favorite
+    -if @question_likes.present?
+      %h3 質問お気に入り一覧
+      %ul.list-group.favorite-question
+        - @question_likes.each do |question_like|
+        - question = Question.find_by(id: question_like.question_id)
+          -if question.subject == "japanese"
+            %li.list-group-item.badge.badge-warning.favorite-question__subject= question.subject_i18n
+          -if question.subject == "math"
+            %li.list-group-item.badge.badge-primary.favorite-question__subject= question.subject_i18n
+          -if question.subject == "society"
+            %li.list-group-item.badge.badge-info.favorite-question__subject= question.subject_i18n
+          -if question.subject == "science"
+            %li.list-group-item.badge.badge-success.favorite-question__subject= question.subject_i18n
+          -if question.subject == "english"
+            %li.list-group-item.badge.badge-danger.favorite-question__subject= question.subject_i18n
+          -if question.images.present?
+            %li.list-group-item
+              - question.images.each do |question_image|
+                %img= image_tag question_image.file.url, class: "card-img-top"
+          %li.list-group-item= question.content
+    -if @answer_likes.present?
+      %h3 解答お気に入り一覧
+      %ul.list-group.favorite-answer
+        - @answer_likes.each do |answer_like|
+        - answer = Answer.find_by(id: answer_like.answer_id)
+          -if answer.answer_images.present?
+            %li.list-group-item
+              - answer.answer_images.each do |answer_image|
+                %img= image_tag answer_image.file.url, class: "card-img-top"
+          %li.list-group-item= answer.content

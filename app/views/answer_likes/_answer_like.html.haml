@@ -1,0 +1,7 @@
+.answerLike__heart
+- if answer.answer_like_user(current_user.id)
+  = link_to question_answer_answer_like_path(question, answer.id, answer.answer_likes.ids), method: :delete, remote: true do
+    .fa.fa-heart.fa-lg.answerLike_heart_icon
+- else
+  = link_to question_answer_answer_likes_path(question, answer.id), method: :post, remote: true do
+    .fa.fa-heart-o.fa-lg.answerLike_heart_icon

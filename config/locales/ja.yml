@@ -8,3 +8,9 @@ ja:
         society: 社会
         science: 理科
         english: 英語
+    user:
+      grade:
+        firstgrade: 1年生
+        secondgrade: 2年生
+        thirdgrade: 3年生
+  

@@ -1,15 +1,16 @@
 .container
   %h3 投稿ページ
-  = form_for @question do |f|
-    .form-group
-      = f.label :subject
-      = f.select :subject, Question.subjects_names, {}, class: "form-control"
-    .form-group
-      = f.label :content
-      = f.text_area :content, class: "form-control js-text-auto-size"
-    .form-group
-      = f.fields_for :images do |image|
-        = render 'image_fields', f: image
-    .links
-      = link_to_add_association '画像追加', f, :images, class: "btn btn-primary"
-    = f.submit "投稿する", class: "btn btn-primary"
+  .question-form
+    = form_for @question do |f|
+      .form-group
+        = f.label :subject
+        = f.select :subject, Question.subjects_names, {}, class: "form-control"
+      .form-group
+        = f.label :content
+        = f.text_area :content, class: "form-control js-text-auto-size"
+      .form-group
+        = f.fields_for :images do |image|
+          = render 'image_fields', f: image
+      .links
+        = link_to_add_association '画像追加', f, :images, class: "btn btn-primary"
+      = f.submit "投稿する", class: "btn btn-primary"

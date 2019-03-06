@@ -1,7 +1,7 @@
 - provide(:title, "マイページ")
 .container
   .question-detail
-    %h3 自分のした質問一覧
+    %h3.question-detail__title 自分のした質問一覧
     %ul.list-group.questionList
       - @question.each do |q|
         -if q.subject == "japanese"
@@ -25,7 +25,7 @@
             = link_to "削除する", question_path(q), method: :delete, class: "btn btn-danger btn-sm",  data: { confirm: '本当に削除してよろしいですか？' }
   .favorite
     -if @question_likes.present?
-      %h3 質問お気に入り一覧
+      %h3.favorite-question__title 質問お気に入り一覧
       %ul.list-group.favorite-question
         - @question_likes.each do |question_like|
         - question = Question.find_by(id: question_like.question_id)
@@ -45,7 +45,7 @@
                 %img= image_tag question_image.file.url, class: "card-img-top"
           %li.list-group-item= question.content
     -if @answer_likes.present?
-      %h3 解答お気に入り一覧
+      %h3.favorite-answer__title 解答お気に入り一覧
       %ul.list-group.favorite-answer
         - @answer_likes.each do |answer_like|
         - answer = Answer.find_by(id: answer_like.answer_id)

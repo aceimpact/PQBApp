@@ -1,11 +1,12 @@
 .navbar {
   margin-bottom: 30px;
-  .navbar-collapse {
-    flex-grow: 0;
-  }
-  .dropdown-menu {
-    width: 100%;
-    text-align: center;
-    }
-
 }
+
+.navbar-collapse {
+  flex-grow: 0;
+}
+
+.dropdown-menu {
+  width: 100%;
+  text-align: center;
+  }

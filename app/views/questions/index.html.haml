@@ -1,25 +1,25 @@
 - provide(:title, 'HOME')
 .container
-  %table.table.table-bordered.table-hover.text-center.questionTable
+  %table.table.table-bordered.table-hover.text-center.question-table
     %thead
       %tr.table-active
-        %th.questionTable__first-table{:scope => "col"} 教科
-        %th.questionTable__second-table{:scope => "col"} 質問
-        %th.questionTable__third-table{:scope => "col"} コメント
+        %th.question-table__first-table{:scope => "col"} 教科
+        %th.question-table__second-table{:scope => "col"} 質問
+        %th.question-table__third-table{:scope => "col"} コメント
     %tbody
       - @questions.each do |q|
         %tr
-          -if q.subject == "japanese"
-            %td.badge.badge-warning.questionTable__subject= q.subject_i18n
-          -if q.subject == "math"
-            %td.badge.badge-primary.questionTable__subject= q.subject_i18n
-          -if q.subject == "society"
-            %td.badge.badge-info.questionTable__subject= q.subject_i18n
-          -if q.subject == "science"
-            %td.badge.badge-success.questionTable__subject= q.subject_i18n
-          -if q.subject == "english"
-            %td.badge.badge-danger.questionTable__subject= q.subject_i18n
-          %td.questionTable__content= link_to q.content, question_path(q)
+          -if q.japanese?
+            %td.badge.badge-warning.question-table__subject= q.subject_i18n
+          -if q.math?
+            %td.badge.badge-primary.question-table__subject= q.subject_i18n
+          -if q.society?
+            %td.badge.badge-info.question-table__subject= q.subject_i18n
+          -if q.science?
+            %td.badge.badge-success.question-table__subject= q.subject_i18n
+          -if q.english?
+            %td.badge.badge-danger.question-table__subject= q.subject_i18n
+          %td.question-table__content= link_to q.content, question_path(q)
           - if q.answers.present?
             %td= link_to "コメント(#{q.answers.count})", question_path(q)
           -else

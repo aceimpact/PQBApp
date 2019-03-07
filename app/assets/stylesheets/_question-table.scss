@@ -1,0 +1,21 @@
+.question-table {
+  table-layout: fixed;
+}
+
+.question-table__first-table {
+  width: 15%;
+}
+
+.question-table__content {
+  text-align: left;
+}
+
+.question-table__subject {
+display: table-cell;
+line-height: normal;
+font-size: 100%;
+}
+
+.question-table__second-table {
+  width: 65%;
+}

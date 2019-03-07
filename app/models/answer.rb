@@ -8,7 +8,7 @@ class Answer < ApplicationRecord
 
   validates :content, presence: true
 
-  def answer_like_user(user_id)
+  def user_answer_liked?(user_id)
     answer_likes.find_by(user_id: user_id)
   end
 end

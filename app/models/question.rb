@@ -15,7 +15,7 @@ class Question < ApplicationRecord
     subjects.keys.map {|subject_key| [I18n.t("enums.question.subject.#{subject_key}"), subject_key]}
   end
 
-  def question_like_user(user_id)
+  def user_question_liked?(user_id)
     question_likes.find_by(user_id: user_id)
   end
 end

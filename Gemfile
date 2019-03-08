@@ -20,6 +20,7 @@ gem 'font-awesome-rails'
 gem 'enum_help'
 gem 'cocoon'
 gem 'autosize-rails'
+gem 'ransack'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -39,4 +40,5 @@ group :development do
   gem 'binding_of_caller'
   gem 'rb-readline'
   gem 'pry-byebug'
+  gem 'faker'
 end

@@ -3,6 +3,8 @@
   .search-form.form-inline
     = search_form_for @search do |f|
       .form-group
+        = f.select :subject_eq, Question.subjects.map { |k,v| [Question.subjects_i18n[k], v] }, {}, class: "form-control"
+      .form-group
         = f.search_field :content_cont, class: "form-control search-form__question", placeholder: "検索したいキーワードを入力して下さい"
         = f.submit "検索", class: "btn btn-info btn-sm"
       - if current_user.teacher?

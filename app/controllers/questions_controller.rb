@@ -2,7 +2,8 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:edit, :update, :destroy]
 
   def index
-    @questions = Question.page(params[:page]).per(15).order(updated_at: :desc)
+    @search = Question.ransack(params[:q])
+    @questions = @search.result.page(params[:page]).per(15).order(updated_at: :desc)
     @answers = Answer.all
   end
 

@@ -1,5 +1,14 @@
 - provide(:title, 'HOME')
 .container
+  .search-form.form-inline
+    = search_form_for @search do |f|
+      .form-group
+        = f.search_field :content_cont, class: "form-control search-form__question", placeholder: "検索したいキーワードを入力して下さい"
+        = f.submit "検索", class: "btn btn-info btn-sm"
+      - if current_user.teacher?
+        .form-group
+          = f.search_field :user_name_cont, class: "form-control search-form__user-name", placeholder: "生徒の名前を入力して下さい"
+          = f.submit "検索", class: "btn btn-info btn-sm"
   %table.table.table-bordered.table-hover.text-center.questionTable
     %thead
       %tr.table-active

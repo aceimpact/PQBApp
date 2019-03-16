@@ -2,7 +2,8 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:edit, :update, :destroy]
 
   def index
-    @questions = Question.page(params[:page]).per(15).order(updated_at: :desc)
+    @search = Question.ransack(params[:q])
+    @questions = @search.result.page(params[:page]).per(10).order(updated_at: :desc)
     @answers = Answer.all
   end
 
@@ -32,7 +33,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if @question.update(question_params)
+    if @question.update(question_param)
       redirect_to @question
     else
       render :edit

@@ -4,13 +4,19 @@
 }
 
 .search-form__question {
-  width: 75%!important;
+  @extend .form-control;
+  width: 75%;
+  display: inline-block;
+  height: 100%;
 }
 
 .search-form__user-name {
-  width: 75%!important;
+  @extend .form-control;
+  width: 75%;
+  display: inline-block;
+  height: 100%;
 }
 
 .search-form__question-subject {
-  width: 15%!important;
+  width: 15%;
 }

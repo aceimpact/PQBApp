@@ -1,11 +1,11 @@
 - provide(:title, 'HOME')
 .container
-  .search-form.form-inline
+  .search-form
     = search_form_for @search do |f|
       .form-group
         = f.select :subject_eq, Question.subjects.map { |k,v| [Question.subjects_i18n[k], v] }, {}, class: "form-control search-form__question-subject"
       .form-group
-        = f.search_field :content_cont, class: "form-control search-form__question", placeholder: "検索したいキーワードを入力して下さい"
+        = f.search_field :content_cont, class: "search-form__question", placeholder: "検索したいキーワードを入力して下さい"
         = f.submit "検索", class: "btn btn-info btn-sm"
       - if current_user.teacher?
         .form-group
@@ -30,9 +30,12 @@
             %td.badge.badge-success.questionTable__subject= q.subject_i18n
           -if q.subject == "english"
             %td.badge.badge-danger.questionTable__subject= q.subject_i18n
-          %td.questionTable__content= link_to q.content, question_path(q)
+          %td.questionTable__content
+            = link_to simple_format(h(q.content)), question_path(q)
           - if q.answers.present?
-            %td= link_to "コメント(#{q.answers.count})", question_path(q)
+            %td
+              = link_to "コメント(#{q.answers.count})", question_path(q)
           -else
-            %td= "コメント(#{q.answers.count})"
+            %td
+              = "コメント(#{q.answers.count})"
   = paginate @questions

@@ -2,8 +2,8 @@
 .container
   .question-detail
     %h3.question-detail__title 自分のした質問一覧
-    %ul.list-group.question-list
-      - @question.each do |q|
+    - @question.each do |q|
+      %ul.list-group.question-list
         -if q.japanese?
           %li.list-group-item.badge.badge-warning.question-list__subject= q.subject_i18n
         -if q.math?
@@ -17,8 +17,12 @@
         -if q.images.present?
           %li.list-group-item
             - q.images.each do |image|
-              %img= image_tag image.file.url, class: "card-img-top"
-        %li.list-group-item= q.content
+              = image_tag image.file.url, class: "card-img-top"
+        %li.list-group-item.list-group-item-action
+          =link_to simple_format(h(q.content)), question_path(q), class: "question-detail__content"
+        - if q.answers.present?
+          %li.list-group-item.list-group-item-action
+            = link_to "コメント(#{q.answers.count})", question_path(q), class: "question-detail__like"
         - if current_user.id == q.user_id
           %li.list-group-item
             = link_to "編集する", edit_question_path(q), class: "btn btn-primary btn-sm"
@@ -43,8 +47,9 @@
           -if question.images.present?
             %li.list-group-item
               - question.images.each do |question_image|
-                %img= image_tag question_image.file.url, class: "card-img-top"
-          %li.list-group-item= question.content
+                = image_tag question_image.file.url, class: "card-img-top"
+          %li.list-group-item.list-group-item-action
+            = link_to simple_format(h(question.content)), question_path(question), class: "favorite-question__content"
     - @answer_likes = AnswerLike.where(user_id: current_user.id)
     -if @answer_likes.present?
       %h3.favorite-answer__title 解答お気に入り一覧
@@ -54,5 +59,6 @@
           -if answer.answer_images.present?
             %li.list-group-item
               - answer.answer_images.each do |answer_image|
-                %img= image_tag answer_image.file.url, class: "card-img-top"
-          %li.list-group-item= answer.content
+                = image_tag answer_image.file.url, class: "card-img-top"
+          %li.list-group-item.list-group-item-action
+            = link_to simple_format(h(answer.content)), question_path(answer.question), class: "favorite-answer__content"

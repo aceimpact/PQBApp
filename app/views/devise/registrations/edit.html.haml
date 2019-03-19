@@ -11,7 +11,7 @@
         %div
           Currently waiting confirmation for: #{resource.unconfirmed_email}
       .form-group
-        = f.label :password
+        = f.label :newpassword
         %i (変更したくない場合は空白のままにしてください)
         = f.password_field :password, autocomplete: "new-password", class: "form-control"
         - if @minimum_password_length

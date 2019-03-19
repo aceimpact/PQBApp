@@ -6,7 +6,8 @@ ja:
         grade: 学年
         email: メールアドレス
         password: パスワード
-        password_confirmation: パスワード確認
+        newpassword: 新しいパスワード
+        password_confirmation: パスワードの確認
         remember_me: 次回から自動的にログイン
         current_password: 現在のパスワード
       question:

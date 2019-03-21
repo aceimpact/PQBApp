@@ -1,5 +1,10 @@
 - provide(:title, "マイページ")
 .container
+  .search-form
+    = search_form_for @search do |f|
+      .form-group
+        = f.search_field :content_cont, class: "search-form__question", placeholder: "検索したいキーワードを入力して下さい"
+        = f.submit "検索", class: "btn btn-info btn-sm"
   .question-detail
     %h3.question-detail__title 自分のした質問一覧
     - @question.each do |q|

@@ -7,31 +7,36 @@
         = f.submit "検索", class: "btn btn-info btn-sm"
   .question-detail
     %h3.question-detail__title 自分のした質問一覧
-    - @question.each do |q|
+    - @question.each do |question|
       %ul.list-group.question-list
-        -if q.japanese?
-          %li.list-group-item.badge.badge-warning.question-list__subject= q.subject_i18n
-        -if q.math?
-          %li.list-group-item.badge.badge-primary.question-list__subject= q.subject_i18n
-        -if q.society?
-          %li.list-group-item.badge.badge-info.question-list__subject= q.subject_i18n
-        -if q.science?
-          %li.list-group-item.badge.badge-success.question-list__subject= q.subject_i18n
-        -if q.english?
-          %li.list-group-item.badge.badge-danger.question-list__subject= q.subject_i18n
-        -if q.images.present?
+        -if question.japanese?
+          %li.list-group-item.badge.badge-warning.question-list__subject
+            = question.subject_i18n
+        -if question.math?
+          %li.list-group-item.badge.badge-primary.question-list__subject
+            = question.subject_i18n
+        -if question.society?
+          %li.list-group-item.badge.badge-info.question-list__subject
+            = question.subject_i18n
+        -if question.science?
+          %li.list-group-item.badge.badge-success.question-list__subject
+            = question.subject_i18n
+        -if question.english?
+          %li.list-group-item.badge.badge-danger.question-list__subject
+            = question.subject_i18n
+        -if question.images.present?
           %li.list-group-item
-            - q.images.each do |image|
+            - question.images.each do |image|
               = image_tag image.file.url, class: "card-img-top"
         %li.list-group-item.list-group-item-action
-          =link_to simple_format(h(q.content)), question_path(q), class: "question-detail__content"
-        - if q.answers.present?
+          =link_to simple_format(h(question.content)), question_path(question), class: "text-dark"
+        - if question.answers.present?
           %li.list-group-item.list-group-item-action
-            = link_to "コメント(#{q.answers.count})", question_path(q), class: "question-detail__like"
-        - if current_user.id == q.user_id
+            = link_to "コメント(#{question.answers.count})", question_path(question), class: "text-dark"
+        - if current_user.id == question.user_id
           %li.list-group-item
-            = link_to "編集する", edit_question_path(q), class: "btn btn-primary btn-sm"
-            = link_to "削除する", question_path(q), method: :delete, class: "btn btn-danger btn-sm",  data: { confirm: '本当に削除してよろしいですか？' }
+            = link_to "編集する", edit_question_path(question), class: "btn btn-primary btn-sm"
+            = link_to "削除する", question_path(question), method: :delete, class: "btn btn-danger btn-sm",  data: { confirm: '本当に削除してよろしいですか？' }
   .favorite
     - @question_likes = QuestionLike.where(user_id: current_user.id)
     -if @question_likes.present?
@@ -54,7 +59,7 @@
               - question.images.each do |question_image|
                 = image_tag question_image.file.url, class: "card-img-top"
           %li.list-group-item.list-group-item-action
-            = link_to simple_format(h(question.content)), question_path(question), class: "favorite-question__content"
+            = link_to simple_format(h(question.content)), question_path(question), class: "text-dark"
     - @answer_likes = AnswerLike.where(user_id: current_user.id)
     -if @answer_likes.present?
       %h3.favorite-answer__title 解答お気に入り一覧
@@ -66,4 +71,4 @@
               - answer.answer_images.each do |answer_image|
                 = image_tag answer_image.file.url, class: "card-img-top"
           %li.list-group-item.list-group-item-action
-            = link_to simple_format(h(answer.content)), question_path(answer.question), class: "favorite-answer__content"
+            = link_to simple_format(h(answer.content)), question_path(answer.question), class: "text-dark"

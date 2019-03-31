@@ -10,7 +10,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
-  enum grade: { firstgrade: 0, secondgrade: 1, thirdgrade: 2 }
+  enum grade: { firstgrade: 0, secondgrade: 1, thirdgrade: 2, teacher: 3 }
 
   mount_uploader :icon, ImagesUploader
 

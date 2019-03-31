@@ -1,0 +1,9 @@
+.dropdown-menu {
+  width:100%;
+}
+
+@media screen and (min-width:991px) {
+  .dropdown-menu {
+    width:auto;
+  }
+}

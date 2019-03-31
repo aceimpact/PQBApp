@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
   def show
-    @user = User.find(params[:id])
-    @question = @user.questions
+    @search = Question.ransack(user_id_eq: current_user.id, content_cont: params[:question_content])
+    @question = @search.result.page(params[:page]).per(10).order(updated_at: :desc)
   end
 
   def update

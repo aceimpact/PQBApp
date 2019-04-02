@@ -90,4 +90,13 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { :host => 'pqbapp.herokuapp.com' }
+  config.action_mailer.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => 587,
+    :authentication => :plain,
+    :user_name      => Settings.sendgrid[:user_name],
+    :password       => Settings.sendgrid[:password],
+    :domain         => 'pqbapp.herokuapp.com',
+    :enable_starttls_auto => true
+  }
 end

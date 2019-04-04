@@ -9,7 +9,7 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.build(answer_params.merge!(user_id: current_user.id))
     if @answer.save
-      AnswerMailer.send_mail(@question.user).deliver
+      AnswerMailer.answer_created(@question.user).deliver_now
       redirect_to root_url
     else
       render :new

@@ -1,5 +1,5 @@
 class AnswerMailer < ApplicationMailer
-  def send_mail(user)
+  def answer_created(user)
     @user = user
     mail to: user.email
   end

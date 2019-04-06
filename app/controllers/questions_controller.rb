@@ -11,8 +11,6 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @answer = @question.answers.build
     @answer.answer_images.build
-    @question_like = QuestionLike.where(question_id: params[:question_id])
-    @answer_like = AnswerLike.where(answer_id: params[:answer_id])
   end
 
   def new
@@ -33,7 +31,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if @question.update(question_param)
+    if @question.update(question_params)
       redirect_to @question
     else
       render :edit

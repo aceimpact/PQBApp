@@ -26,7 +26,7 @@ class AnswersController < ApplicationController
 
   def destroy
     @answer.destroy!
-    redirect_to root_url
+    redirect_to @question
   end
 
   private
@@ -43,6 +43,6 @@ class AnswersController < ApplicationController
   end
 
   def teacher_user
-    redirect_to(root_path) unless current_user.teacher?
+    redirect_to(root_path) unless current_user.teacher
   end
 end

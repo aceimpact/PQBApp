@@ -11,7 +11,7 @@
         .form-group
           = f.search_field :user_name_cont, class: "form-control search-form__user-name", placeholder: "生徒の名前を入力して下さい"
           = f.submit "検索", class: "btn btn-info btn-sm"
-  %table.table.table-bordered.table-hover.text-center.questionTable
+  %table.table.table-bordered.table-hover.text-center.question-table
     %thead
       %tr.table-active
         %th.question-table__first-table{:scope => "col"} 教科
@@ -31,7 +31,7 @@
           -if q.english?
             %td.badge.badge-danger.question-table__subject= q.subject_i18n
           %td.questionTable__content
-            = link_to simple_format(h(q.content)), question_path(q)
+            = link_to simple_format(h(q.content)), question_path(q), class: "question-table__content"
           - if q.answers.present?
             %td
               = link_to "コメント(#{q.answers.count})", question_path(q)

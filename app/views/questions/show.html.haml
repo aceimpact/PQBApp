@@ -8,8 +8,8 @@
       -if @question.images.present?
         %li.list-group-item
           - @question.images.each do |image|
-            %img= image_tag image.file.url, class: "card-img-top question-detail__image"
-      %li.list-group-item= @question.content
+            = image_tag image.file.url, class: "card-img-top question-detail__image"
+      %li.list-group-item= simple_format(h(@question.content))
       - if user_signed_in? && current_user.id != @question.user_id
         %li.list-group-item.js-question_like-button.question-like{:class => "js-question_like-button-#{@question.id}"}
           = render partial: 'question_likes/question_like', locals: { question: @question }
@@ -25,8 +25,8 @@
           -if answer.answer_images.present?
             %li.list-group-item
               - answer.answer_images.each do |answer_image|
-                %img= image_tag answer_image.file.url, class: "card-img-top"
-          %li.list-group-item= answer.content
+                = image_tag answer_image.file.url, class: "card-img-top"
+          %li.list-group-item= simple_format(h(answer.content))
           - if user_signed_in? && current_user.id != answer.user_id
             %li.list-group-item.js-answer_like-button.answer-like{:class => "js-answer_like-button-#{answer.id}"}
               = render partial: 'answer_likes/answer_like', locals: { answer: answer, question: @question }
@@ -34,7 +34,7 @@
             %li.list-group-item
               = link_to "編集する", edit_question_answer_path(@question, answer), class: "btn btn-primary btn-sm"
               = link_to "削除する", question_answer_path(@question, answer), method: :delete, class: "btn btn-danger btn-sm",  data: { confirm: '本当に削除してよろしいですか？' }
-  - if current_user.teacher?
+  - if current_user.teacher
     .answerform.p-3.mb-2.bg-dark.text-whit
       = form_for [@question, @answer] do |f|
         .form-group

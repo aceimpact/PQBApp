@@ -13,8 +13,10 @@
     = render 'layouts/header'
     .flash
       -if notice
-        %p.alert.alert-info.flash__notice= notice
+        %p.alert.alert-info.flash__notice
+          = notice
       -if alert
-        %p.alert.alert-danger.flash__alert= alert
+        %p.alert.alert-danger.flash__alert
+          = alert
     = yield
     = render 'layouts/footer'

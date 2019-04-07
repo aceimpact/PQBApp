@@ -89,15 +89,16 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { :host => 'pqbapp.herokuapp.com' }
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
-    :port           => 587,
-    :authentication => :plain,
-    :user_name      => Settings.sendgrid[:user_name],
-    :password       => Settings.sendgrid[:password],
-    :domain         => 'pqbapp.herokuapp.com',
-    :enable_starttls_auto => true
-  }
+  config.action_mailer.default_url_options = { :host => 'http://pqbapp.herokuapp.com' }
+    config.action_mailer.raise_delivery_errors = false
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      :address        => 'smtp.sendgrid.net',
+      :port           => 587,
+      :authentication => :plain,
+      :user_name      => Settings.sendgrid[:user_name],
+      :password       => Settings.sendgrid[:password],
+      :domain         => 'heroku.com',
+      :enable_starttls_auto => true
+    }
 end

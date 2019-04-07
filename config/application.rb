@@ -21,6 +21,8 @@ module PQBApp
 
     config.i18n.default_locale = :ja
 
+    config.assets.initialize_on_precompile = false
+
     config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
   end
 end

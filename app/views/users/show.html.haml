@@ -1,74 +1,79 @@
 - provide(:title, "マイページ")
 .container
-  .search-form
-    = search_form_for @search do |f|
-      .form-group
-        = f.search_field :content_cont, class: "search-form__question", placeholder: "検索したいキーワードを入力して下さい"
-        = f.submit "検索", class: "btn btn-info btn-sm"
-  .question-detail
-    - @question.each do |question|
-      %h3.question-detail__title 自分のした質問一覧
-      %ul.list-group.question-list
-        -if question.japanese?
-          %li.list-group-item.badge.badge-warning.question-list__subject
-            = question.subject_i18n
-        -if question.math?
-          %li.list-group-item.badge.badge-primary.question-list__subject
-            = question.subject_i18n
-        -if question.society?
-          %li.list-group-item.badge.badge-info.question-list__subject
-            = question.subject_i18n
-        -if question.science?
-          %li.list-group-item.badge.badge-success.question-list__subject
-            = question.subject_i18n
-        -if question.english?
-          %li.list-group-item.badge.badge-danger.question-list__subject
-            = question.subject_i18n
-        -if question.images.present?
-          %li.list-group-item
-            - question.images.each do |image|
-              = image_tag image.file.url, class: "card-img-top"
-        %li.list-group-item.list-group-item-action
-          =link_to simple_format(h(question.content)), question_path(question), class: "text-dark"
-        - if question.answers.present?
-          %li.list-group-item.list-group-item-action
-            = link_to "コメント(#{question.answers.count})", question_path(question), class: "text-dark"
-        - if current_user.id == question.user_id
-          %li.list-group-item
-            = link_to "編集する", edit_question_path(question), class: "btn btn-primary btn-sm"
-            = link_to "削除する", question_path(question), method: :delete, class: "btn btn-danger btn-sm",  data: { confirm: '本当に削除してよろしいですか？' }
-  .favorite
-    - @question_likes = QuestionLike.where(user_id: current_user.id)
-    -if @question_likes.present?
-      %h3.favorite-question__title 質問お気に入り一覧
-      %ul.list-group.favorite-question
-        - @question_likes.each do |question_like|
-        - question = Question.find_by(id: question_like.question_id)
-          -if question.japanese?
-            %li.list-group-item.badge.badge-warning.favorite-question__subject= question.subject_i18n
-          -if question.math?
-            %li.list-group-item.badge.badge-primary.favorite-question__subject= question.subject_i18n
-          -if question.society?
-            %li.list-group-item.badge.badge-info.favorite-question__subject= question.subject_i18n
-          -if question.science?
-            %li.list-group-item.badge.badge-success.favorite-question__subject= question.subject_i18n
-          -if question.english?
-            %li.list-group-item.badge.badge-danger.favorite-question__subject= question.subject_i18n
-          -if question.images.present?
-            %li.list-group-item
-              - question.images.each do |question_image|
-                = image_tag question_image.file.url, class: "card-img-top"
-          %li.list-group-item.list-group-item-action
-            = link_to simple_format(h(question.content)), question_path(question), class: "text-dark"
-    - @answer_likes = AnswerLike.where(user_id: current_user.id)
-    -if @answer_likes.present?
-      %h3.favorite-answer__title 解答お気に入り一覧
-      %ul.list-group.favorite-answer
-        - @answer_likes.each do |answer_like|
-        - answer = Answer.find_by(id: answer_like.answer_id)
-          -if answer.answer_images.present?
-            %li.list-group-item
-              - answer.answer_images.each do |answer_image|
-                = image_tag answer_image.file.url, class: "card-img-top"
-          %li.list-group-item.list-group-item-action
-            = link_to simple_format(h(answer.content)), question_path(answer.question), class: "text-dark"
+  -if @question.present? || @question_likes.present? || @answer_likes.present?
+    .user-have-contribution-favorite
+      .search-form
+        = search_form_for @search do |f|
+          .form-group
+            = f.search_field :content_cont, class: "search-form__question", placeholder: "検索したいキーワードを入力して下さい"
+            = f.submit "検索", class: "btn btn-info btn-sm"
+      .question-detail
+        - @question.each do |question|
+          %h3.question-detail__title 自分のした質問一覧
+          %ul.list-group.question-list
+            -if question.japanese?
+              %li.list-group-item.badge.badge-warning.question-list__subject
+                = question.subject_i18n
+            -if question.math?
+              %li.list-group-item.badge.badge-primary.question-list__subject
+                = question.subject_i18n
+            -if question.society?
+              %li.list-group-item.badge.badge-info.question-list__subject
+                = question.subject_i18n
+            -if question.science?
+              %li.list-group-item.badge.badge-success.question-list__subject
+                = question.subject_i18n
+            -if question.english?
+              %li.list-group-item.badge.badge-danger.question-list__subject
+                = question.subject_i18n
+            -if question.images.present?
+              %li.list-group-item
+                - question.images.each do |image|
+                  = image_tag image.file.url, class: "card-img-top"
+            %li.list-group-item.list-group-item-action
+              =link_to simple_format(h(question.content)), question_path(question), class: "text-dark"
+            - if question.answers.present?
+              %li.list-group-item.list-group-item-action
+                = link_to "コメント(#{question.answers.count})", question_path(question), class: "text-dark"
+            - if current_user.id == question.user_id
+              %li.list-group-item
+                = link_to "編集する", edit_question_path(question), class: "btn btn-primary btn-sm"
+                = link_to "削除する", question_path(question), method: :delete, class: "btn btn-danger btn-sm",  data: { confirm: '本当に削除してよろしいですか？' }
+      .favorite
+        - @question_likes = QuestionLike.where(user_id: current_user.id)
+        -if @question_likes.present?
+          %h3.favorite-question__title 質問お気に入り一覧
+          %ul.list-group.favorite-question
+            - @question_likes.each do |question_like|
+            - question = Question.find_by(id: question_like.question_id)
+              -if question.japanese?
+                %li.list-group-item.badge.badge-warning.favorite-question__subject= question.subject_i18n
+              -if question.math?
+                %li.list-group-item.badge.badge-primary.favorite-question__subject= question.subject_i18n
+              -if question.society?
+                %li.list-group-item.badge.badge-info.favorite-question__subject= question.subject_i18n
+              -if question.science?
+                %li.list-group-item.badge.badge-success.favorite-question__subject= question.subject_i18n
+              -if question.english?
+                %li.list-group-item.badge.badge-danger.favorite-question__subject= question.subject_i18n
+              -if question.images.present?
+                %li.list-group-item
+                  - question.images.each do |question_image|
+                    = image_tag question_image.file.url, class: "card-img-top"
+              %li.list-group-item.list-group-item-action
+                = link_to simple_format(h(question.content)), question_path(question), class: "text-dark"
+        - @answer_likes = AnswerLike.where(user_id: current_user.id)
+        -if @answer_likes.present?
+          %h3.favorite-answer__title 解答お気に入り一覧
+          %ul.list-group.favorite-answer
+            - @answer_likes.each do |answer_like|
+            - answer = Answer.find_by(id: answer_like.answer_id)
+              -if answer.answer_images.present?
+                %li.list-group-item
+                  - answer.answer_images.each do |answer_image|
+                    = image_tag answer_image.file.url, class: "card-img-top"
+              %li.list-group-item.list-group-item-action
+                = link_to simple_format(h(answer.content)), question_path(answer.question), class: "text-dark"
+  -else
+    .user-have-no-contribution-favorite
+      %h3.text-muted.text-center 質問とお気に入りした投稿はありません

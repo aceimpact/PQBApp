@@ -98,7 +98,7 @@ Rails.application.configure do
       :authentication => :plain,
       :user_name      => Settings.sendgrid[:user_name],
       :password       => Settings.sendgrid[:password],
-      :domain         => 'heroku.com',
+      :domain         => 'pqbapp.herokuapp.com',
       :enable_starttls_auto => true
     }
 end

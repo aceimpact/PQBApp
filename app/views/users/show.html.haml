@@ -6,8 +6,8 @@
         = f.search_field :content_cont, class: "search-form__question", placeholder: "検索したいキーワードを入力して下さい"
         = f.submit "検索", class: "btn btn-info btn-sm"
   .question-detail
+    %h3.question-detail__title 自分のした質問一覧
     - @question.each do |question|
-      %h3.question-detail__title 自分のした質問一覧
       %ul.list-group.question-list
         -if question.japanese?
           %li.list-group-item.badge.badge-warning.question-list__subject
@@ -24,10 +24,6 @@
         -if question.english?
           %li.list-group-item.badge.badge-danger.question-list__subject
             = question.subject_i18n
-        -if question.images.present?
-          %li.list-group-item
-            - question.images.each do |image|
-              = image_tag image.file.url, class: "card-img-top"
         %li.list-group-item.list-group-item-action
           =link_to simple_format(h(question.content)), question_path(question), class: "text-dark"
         - if question.answers.present?

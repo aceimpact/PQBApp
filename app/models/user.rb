@@ -8,7 +8,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable
+         #, :confirmable
 
   enum grade: { firstgrade: 0, secondgrade: 1, thirdgrade: 2, teacher: 3 }
 
